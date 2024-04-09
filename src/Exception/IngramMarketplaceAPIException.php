@@ -15,7 +15,7 @@ class IngramMarketplaceAPIException extends Exception
      * @param int                $code
      * @param ErrorResponse|null $errorResponse
      */
-    public function __construct(string $message = "", int $code = 0, protected ?ErrorResponse $errorResponse = null)
+    public function __construct(string $message = '', int $code = 0, protected ?ErrorResponse $errorResponse = null)
     {
         parent::__construct($message, $code);
     }

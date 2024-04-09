@@ -5,6 +5,7 @@ namespace Inserve\IngramMarketplaceAPI;
 use GuzzleHttp\Client;
 use Inserve\IngramMarketplaceAPI\Client\APIClient;
 use Inserve\IngramMarketplaceAPI\Exception\IngramMarketplaceAPIException;
+use Psr\Log\LoggerInterface;
 use SensitiveParameter;
 
 /**
@@ -14,14 +15,20 @@ class IngramMarketplaceAPIClient
     protected APIClient $apiClient;
 
     /**
-     * @param APIClient|null $apiClient
+     * @param APIClient|null       $apiClient
+     * @param LoggerInterface|null $logger
+     * @param string|null          $baseUri
      */
-    public function __construct(?APIClient $apiClient = null)
+    public function __construct(?APIClient $apiClient = null, ?LoggerInterface $logger = null, ?string $baseUri = null)
     {
         if (! $apiClient) {
             $apiClient = new APIClient(
-                new Client(['base_uri' => 'https://api.cloud.im/marketplace/eu'])
+                new Client(['base_uri' => $baseUri ?? 'https://api.cloud.im'])
             );
+        }
+
+        if ($logger) {
+            $apiClient->setLogger($logger);
         }
 
         $this->apiClient = $apiClient;
@@ -79,7 +86,10 @@ class IngramMarketplaceAPIClient
             ),
         ];
 
-        $this->apiClient->setSubscriptionKey($subscriptionKey);
+        $this->apiClient
+            ->setMarketPlace($marketPlace)
+            ->setSubscriptionKey($subscriptionKey);
+
         $bearerToken = $this->apiClient->call(
             'POST',
             '/token',

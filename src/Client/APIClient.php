@@ -10,7 +10,8 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use Inserve\IngramMarketplaceAPI\Exception\IngramMarketplaceAPIException;
 use Inserve\IngramMarketplaceAPI\Models\ErrorResponse;
-use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerAwareTrait;
+use SensitiveParameter;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -29,17 +30,19 @@ use Symfony\Component\Serializer\Serializer;
  */
 class APIClient
 {
+    use LoggerAwareTrait;
+
     protected ?string $bearerToken = null;
     protected ?string $subscriptionKey = null;
+    protected string $marketPlace = 'eu';
 
     protected Serializer $serializer;
     protected ObjectNormalizer $normalizer;
 
     /**
-     * @param ClientInterface      $client
-     * @param LoggerInterface|null $logger
+     * @param ClientInterface $client
      */
-    public function __construct(protected ClientInterface $client, protected ?LoggerInterface $logger = null)
+    public function __construct(protected ClientInterface $client)
     {
         $classMetadataFactory = new ClassMetadataFactory(new AttributeLoader());
         $nameConverter =  new MetadataAwareNameConverter(
@@ -66,19 +69,11 @@ class APIClient
     }
 
     /**
-     * @return ClientInterface
-     */
-    public function getClient(): ClientInterface
-    {
-        return $this->client;
-    }
-
-    /**
      * @param string $bearerToken
      *
      * @return void
      */
-    public function setBearerToken(#[\SensitiveParameter] string $bearerToken): void
+    public function setBearerToken(#[SensitiveParameter] string $bearerToken): void
     {
         $this->bearerToken = $bearerToken;
     }
@@ -86,11 +81,25 @@ class APIClient
     /**
      * @param string $subscriptionKey
      *
-     * @return void
+     * @return self
      */
-    public function setSubscriptionKey(string $subscriptionKey): void
+    public function setSubscriptionKey(string $subscriptionKey): self
     {
         $this->subscriptionKey = $subscriptionKey;
+
+        return $this;
+    }
+
+    /**
+     * @param string $marketPlace
+     *
+     * @return $this
+     */
+    public function setMarketPlace(string $marketPlace): self
+    {
+        $this->marketPlace = $marketPlace;
+
+        return $this;
     }
 
     /**
@@ -172,7 +181,7 @@ class APIClient
      */
     protected function getApiUrl(string $url): string
     {
-        return sprintf('/marketplace/eu/%s', $url);
+        return sprintf('/marketplace/%s/%s', $this->marketPlace, $url);
     }
 
     /**
