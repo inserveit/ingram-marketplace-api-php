@@ -24,7 +24,7 @@ class ErrorResponse
     /**
      * @param string|null $timestamp
      *
-     * @return $this
+     * @return self
      */
     public function setTimestamp(?string $timestamp): self
     {
@@ -44,7 +44,7 @@ class ErrorResponse
     /**
      * @param int|null $status
      *
-     * @return $this
+     * @return self
      */
     public function setStatus(?int $status): self
     {
@@ -64,7 +64,7 @@ class ErrorResponse
     /**
      * @param string|null $error
      *
-     * @return $this
+     * @return self
      */
     public function setError(?string $error): self
     {
@@ -84,7 +84,7 @@ class ErrorResponse
     /**
      * @param string|null $path
      *
-     * @return $this
+     * @return self
      */
     public function setPath(?string $path): self
     {
@@ -104,7 +104,7 @@ class ErrorResponse
     /**
      * @param string|null $correlationId
      *
-     * @return $this
+     * @return self
      */
     public function setCorrelationId(?string $correlationId): self
     {

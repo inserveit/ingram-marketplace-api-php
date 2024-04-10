@@ -91,18 +91,6 @@ class APIClient
     }
 
     /**
-     * @param string $marketPlace
-     *
-     * @return $this
-     */
-    public function setMarketPlace(string $marketPlace): self
-    {
-        $this->marketPlace = $marketPlace;
-
-        return $this;
-    }
-
-    /**
      * @return string|null
      */
     public function getBearerToken(): ?string
@@ -148,6 +136,7 @@ class APIClient
                 array_merge($headers, $this->getDefaultHeaders()),
                 $body
             );
+
             $response = $this->client->send($request);
 
             return json_decode((string) $response->getBody(), true);
@@ -181,7 +170,7 @@ class APIClient
      */
     protected function getApiUrl(string $url): string
     {
-        return sprintf('/marketplace/%s/%s', $this->marketPlace, $url);
+        return sprintf('/marketplace/eu/%s', $url);
     }
 
     /**

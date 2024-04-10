@@ -42,9 +42,9 @@ class IngramMarketplaceAPIClientTest extends TestCase
             ->method('call')
             ->with(
                 'POST',
-                '/token',
+                'token',
                 ['Authorization' => 'Basic dXNlcjpwYXNzd29yZA=='],
-                '{"marketplace":"eu"}'
+                '{"marketplace":"nl"}'
             )->willReturn(['token' => 'access.token']);
 
         $this->apiClient->expects(self::once())
@@ -53,7 +53,7 @@ class IngramMarketplaceAPIClientTest extends TestCase
 
         self::assertSame(
             'access.token',
-            $this->ingramClient->authenticate('user', 'password', '12345')
+            $this->ingramClient->authenticate('user', 'password', '12345', 'nl')
         );
     }
 }

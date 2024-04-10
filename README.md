@@ -25,6 +25,12 @@ use Inserve\IngramMarketplaceAPI\IngramMarketplaceAPIClient;
 require 'vendor/autoload.php';
 
 $api = new IngramMarketplaceAPIClient();
-$result = $api->authenticate('username', 'password', 'subscription.key', 'eu');
+$result = $api->authenticate('username', 'password', 'subscription.key', 'nl');
+
+if (! $result) {
+    return;
+}
+
+$products = $api->product->list();
 
 ```

@@ -3,12 +3,18 @@
 namespace Inserve\IngramMarketplaceAPI;
 
 use GuzzleHttp\Client;
+use Inserve\IngramMarketplaceAPI\API\CustomerAPI;
+use Inserve\IngramMarketplaceAPI\API\ProductAPI;
+use Inserve\IngramMarketplaceAPI\API\SubscriptionAPI;
 use Inserve\IngramMarketplaceAPI\Client\APIClient;
 use Inserve\IngramMarketplaceAPI\Exception\IngramMarketplaceAPIException;
 use Psr\Log\LoggerInterface;
 use SensitiveParameter;
 
 /**
+ * @property CustomerAPI     $customer
+ * @property ProductAPI      $product
+ * @property SubscriptionAPI $subscription
  */
 class IngramMarketplaceAPIClient
 {
@@ -86,13 +92,10 @@ class IngramMarketplaceAPIClient
             ),
         ];
 
-        $this->apiClient
-            ->setMarketPlace($marketPlace)
-            ->setSubscriptionKey($subscriptionKey);
-
+        $this->apiClient->setSubscriptionKey($subscriptionKey);
         $bearerToken = $this->apiClient->call(
             'POST',
-            '/token',
+            'token',
             $headers,
             (string) json_encode(['marketplace' => $marketPlace])
         );
