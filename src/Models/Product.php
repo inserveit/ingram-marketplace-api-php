@@ -12,6 +12,7 @@ class Product
     protected ?string $id = null;
     protected ?string $serviceName = null;
     protected ?string $name = null;
+    protected ?int $quantity = null;
     protected ?string $minimumQuantity = null;
     protected ?string $maximumQuantity = null;
     /** @var Price[]|null */
@@ -60,6 +61,14 @@ class Product
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
     }
 
     /**
@@ -174,6 +183,18 @@ class Product
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @param int|null $quantity
+     *
+     * @return self
+     */
+    public function setQuantity(?int $quantity): self
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }
