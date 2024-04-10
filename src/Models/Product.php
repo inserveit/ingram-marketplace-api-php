@@ -19,6 +19,8 @@ class Product
     protected ?array $prices = null;
     /** @var Price[]|null */
     protected ?array $costs = null;
+    protected ?Price $unitPrice = null;
+    protected ?Price $unitCost = null;
     protected ?Period $billingPeriod = null;
     protected ?Period $subscriptionPeriod = null;
     protected ?string $billingModel = null;
@@ -101,6 +103,22 @@ class Product
     public function getCosts(): ?array
     {
         return $this->costs;
+    }
+
+    /**
+     * @return Price|null
+     */
+    public function getUnitPrice(): ?Price
+    {
+        return $this->unitPrice;
+    }
+
+    /**
+     * @return Price|null
+     */
+    public function getUnitCost(): ?Price
+    {
+        return $this->unitCost;
     }
 
     /**
@@ -243,6 +261,30 @@ class Product
     public function setCosts(?array $costs): self
     {
         $this->costs = $costs;
+
+        return $this;
+    }
+
+    /**
+     * @param Price|null $unitPrice
+     *
+     * @return self
+     */
+    public function setUnitPrice(?Price $unitPrice): self
+    {
+        $this->unitPrice = $unitPrice;
+
+        return $this;
+    }
+
+    /**
+     * @param Price|null $unitCost
+     *
+     * @return self
+     */
+    public function setUnitCost(?Price $unitCost): self
+    {
+        $this->unitCost = $unitCost;
 
         return $this;
     }
