@@ -92,7 +92,7 @@ class IngramMarketplaceAPIClient
             ),
         ];
 
-        $this->apiClient->setSubscriptionKey($subscriptionKey);
+        $this->setSubscriptionKey($subscriptionKey);
         $bearerToken = $this->apiClient->call(
             'POST',
             'token',
@@ -105,8 +105,28 @@ class IngramMarketplaceAPIClient
         }
 
         $bearerToken = $bearerToken['token'];
-        $this->apiClient->setBearerToken($bearerToken);
+        $this->setBearerToken($bearerToken);
 
         return $bearerToken;
+    }
+
+    /**
+     * @param string $subscriptionKey
+     *
+     * @return void
+     */
+    public function setSubscriptionKey(string $subscriptionKey): void
+    {
+        $this->apiClient->setSubscriptionKey($subscriptionKey);
+    }
+
+    /**
+     * @param string $bearerToken
+     *
+     * @return void
+     */
+    public function setBearerToken(string $bearerToken): void
+    {
+        $this->apiClient->setBearerToken($bearerToken);
     }
 }
