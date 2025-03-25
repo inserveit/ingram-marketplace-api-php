@@ -5,7 +5,7 @@ namespace Inserve\IngramMarketplaceAPI\Models;
 /**
  *
  */
-class ErrorResponse
+final class ErrorResponse
 {
     protected ?string $timestamp = null;
     protected ?int $status = null;

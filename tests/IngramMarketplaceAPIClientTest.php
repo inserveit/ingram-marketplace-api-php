@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 /**
  *
  */
-class IngramMarketplaceAPIClientTest extends TestCase
+final class IngramMarketplaceAPIClientTest extends TestCase
 {
     /** @psalm-suppress PropertyNotSetInConstructor */
     protected MockObject $apiClient;

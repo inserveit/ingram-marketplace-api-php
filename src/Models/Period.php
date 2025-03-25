@@ -5,7 +5,7 @@ namespace Inserve\IngramMarketplaceAPI\Models;
 /**
  *
  */
-class Period
+final class Period
 {
     protected ?string $type = null;
     protected ?int $duration = null;

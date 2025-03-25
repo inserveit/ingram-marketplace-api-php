@@ -104,10 +104,11 @@ class IngramMarketplaceAPIClient
             return null;
         }
 
-        $bearerToken = $bearerToken['token'];
-        $this->setBearerToken($bearerToken);
+        /** @var string $token */
+        $token = $bearerToken['token'];
+        $this->setBearerToken($token);
 
-        return $bearerToken;
+        return $token;
     }
 
     /**

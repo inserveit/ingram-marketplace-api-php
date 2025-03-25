@@ -5,7 +5,7 @@ namespace Inserve\IngramMarketplaceAPI\Models;
 /**
  *
  */
-class Pagination
+final class Pagination
 {
     protected ?int $offset = null;
     protected ?int $limit = null;

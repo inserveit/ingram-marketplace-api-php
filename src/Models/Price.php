@@ -5,7 +5,7 @@ namespace Inserve\IngramMarketplaceAPI\Models;
 /**
  *
  */
-class Price
+final class Price
 {
     protected ?string $currency = null;
     protected ?string $amount = null;

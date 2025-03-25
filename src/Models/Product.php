@@ -5,7 +5,7 @@ namespace Inserve\IngramMarketplaceAPI\Models;
 /**
  *
  */
-class Product
+final class Product
 {
     protected ?string $mpn = null;
     protected ?string $vendor = null;

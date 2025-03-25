@@ -5,7 +5,7 @@ namespace Inserve\IngramMarketplaceAPI\Models;
 /**
  *
  */
-class PaginatedCustomerResponse extends AbstractPaginationResponse
+final class PaginatedCustomerResponse extends AbstractPaginationResponse
 {
     /** @var Customer[]|null */
     protected ?array $data = [];

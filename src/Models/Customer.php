@@ -5,7 +5,7 @@ namespace Inserve\IngramMarketplaceAPI\Models;
 /**
  *
  */
-class Customer
+final class Customer
 {
     protected ?string $id = null;
     protected ?string $externalId = null;

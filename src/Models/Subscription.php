@@ -5,7 +5,7 @@ namespace Inserve\IngramMarketplaceAPI\Models;
 /**
  *
  */
-class Subscription
+final class Subscription
 {
     protected ?string $id = null;
     protected ?string $name = null;
